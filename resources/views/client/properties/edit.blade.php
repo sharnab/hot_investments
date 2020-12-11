@@ -40,12 +40,12 @@
 
                         <div class="col-md-8 column" style="padding-top: 5%">
                             <div class="heading4">
-                                <h2>EDIT PROFILE</h2>
+                                <h2>EDIT PROPERTY</h2>
                             </div>
-                            {!! Form::model($profileData,['url' => route('profile_update',$profileData['id']), 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
+                            {!! Form::model($propertyData,['url' => route('property_update',$propertyData['id']), 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
                             {{ csrf_field() }}
                             {{method_field('PUT')}}
-                            @include('client.profile.form',['submit'=>__('Save')])
+                            @include('client.property.form',['submit'=>__('Save')])
                         </div>
                         <aside class="col-md-2 column">
                             &nbsp;

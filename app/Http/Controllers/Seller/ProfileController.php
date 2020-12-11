@@ -96,7 +96,15 @@ class ProfileController extends Controller
     {
         // $property = Property::find($id);
         // return view('client.profile.edit', compact('property'));
-        return view('client.profile.edit');
+        $profileData = array(
+            'id'=>'1',
+            'title'=>'Mahedi',
+            'email'=>'mahedi@gmail.com',
+            'phone'=>'01981929182',
+            'bio'=>'jfdjfhdsjfsd',
+            'file_name'=>''
+        );
+        return view('client.profile.edit', compact('profileData'));
     }
 
     /**

@@ -31,11 +31,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/property/store', 'Seller\PropertyController@store')->name('property_store');
 	Route::get('/property/edit/{id}', 'Seller\PropertyController@edit')->name('property_edit');
 	Route::get('/property/show/{id}', 'Seller\PropertyController@show')->name('property_show');
-    Route::post('/property/update', 'Seller\PropertyController@update')->name('update');
+    Route::put('/property/update/{id}', 'Seller\PropertyController@update')->name('property_update');
 
 	Route::get('/property/getSingleProperty/{id}', 'Seller\PropertyController@getSingleProperty');
 
 	Route::get('/profile/edit/{id}', 'Seller\ProfileController@edit')->name('profile_edit');
+	Route::put('/profile/update/{id}', 'Seller\ProfileController@update')->name('profile_update');
 
 	Route::get('/chat', 'Seller\ChatController@index')->name('chat');
 	Route::get('/message', 'Seller\MessageController@index')->name('message');
