@@ -1,0 +1,81 @@
+{
+    "status": true,
+    "results": 1,
+    "message": "Data fetched succesfully",
+    "data": {
+        "property": [
+            {
+                "location": {
+                    "description": "Vegas, USA",
+                    "address": "301 Biscayne Blvd, Vegas, FL 33132, US",
+                    "coordinates": [
+                        -115.2306538,
+                        36.1797013
+                    ]
+                },
+                "photos": [
+                    "img/property/property-1599129553314-986956640.jpeg",
+                    "img/property/property-1599129557009-735220991.jpeg"
+                ],
+                "approved": true,
+                "hotLevel": 4,
+                "title": "Apartment",
+                "description": "Apartment with good neighbours",
+                "price": 15000,
+                "seller": {
+                    "name": "Zac Bliton",
+                    "id": "5f50c7a7551ad80ba2263625"
+                },
+                "createdAt": "2020-09-03T10:39:17.426Z",
+                "id": "5f50c7d5551ad80ba2263626"
+            }
+        ]
+    }
+}
+
+Login
+{
+    "firebaseUID": "4aaFPVT6o7OzxvWTWzwPgmtWwYN2"
+}
+
+{
+    "status": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNTBjN2E3NTUxYWQ4MGJhMjI2MzYyNSIsImlhdCI6MTYwMTIyMjE0MywiZXhwIjoxNjA4OTk4MTQzfQ.R7s2RG9tnr1f--FglYX1aJdWfiOejS5QgZLJzAL2uaE",
+    "data": {
+        "user": {
+            "loggedInFrom": "email",
+            "role": "admin",
+            "isPhoneVerified": false,
+            "email": "shafayatrmg@gmail.com",
+            "firebaseUID": "4aaFPVT6o7OzxvWTWzwPgmtWwYN2",
+            "name": "Zac Bliton",
+            "phone": "01719429826",
+            "id": "5f50c7a7551ad80ba2263625"
+        }
+    }
+}
+
+Test data
+{
+    "firebaseUID": "4aaFPVT6o7OzxvWTWzwPgmtWwZM2",
+    "name": "Test Admin",
+    "email": "test@test.com",
+    "phone": "1234567890"
+}
+
+{
+    "status": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzBiNGMyNTUxYWQ4MGJhMjI2MzYyOSIsImlhdCI6MTYwMTIyOTk0MSwiZXhwIjoxNjA5MDA1OTQxfQ.VRIlPV4gQalp-6z1vhdvLFGP4ZwsIaklseUHvQ61914",
+    "data": {
+        "user": {
+            "loggedInFrom": "email",
+            "role": "user",
+            "isPhoneVerified": false,
+            "email": "test@test.com",
+            "firebaseUID": "4aaFPVT6o7OzxvWTWzwPgmtWwZM2",
+            "name": "Test Admin",
+            "phone": "1234567890",
+            "id": "5f70b4c2551ad80ba2263629"
+        }
+    }
+}
