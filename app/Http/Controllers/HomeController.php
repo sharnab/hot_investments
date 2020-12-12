@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         // api for home page goes here
-        return view('client.home.index', compact('propertyList'));
+        return view('client.properties.index', compact('propertyList'));
     }
 
     public function login()
