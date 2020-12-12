@@ -56,7 +56,40 @@
                                                             </div>
                                                             <div class="properties-content">
                                                                 <div class="row">
+                                                                    @foreach($propertyList as $property)
+                                                                    <div class="col-md-4 col-sm-6  col-xs-12">
+                                                                        <div class="properties-box">
+                                                                            <div class="properties-thumb">
+                                                                                <!-- <img src="img/demo/property1.jpg" alt=""> -->
+                                                                                <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$property['photos'][0]}}">
+                                                                                <span class="spn-status"> For Rent </span>
+                                                                                <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                                                                <ul class="property-info">
+                                                                                    <li>
+                                                                                        <i class="fa  fa-retweet"> </i> <span>{{ $property['propertySize'] }} sqft </span>
+                                                                                    </li>
+                                                                                    <li class="li-rl"></li>
+                                                                                    <li>
+                                                                                        <i class="fa  fa-bed"></i><span>  {{ $property['bedrooms'] }}   </span>
+                                                                                    </li>
+                                                                                    <li class="li-rl"></li>
+                                                                                    <li>
+                                                                                        <i class="fa  fa-building"> </i> <span>{{ $property['walkability'] }}   </span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <a href="/property/show/{{$property['id']}}" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
 
+                                                                                <a href="/property/edit/{{$property['id']}}" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
+
+                                                                                <a href="/property/delete/{{$property['id']}}" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
+
+                                                                            </div>
+                                                                            <h3><a href="property.html" title="">{{ $property['title'] }}</a></h3>
+                                                                            <span class="price">${{ $property['price'] }}</span>
+                                                                        </div><!-- prop Box -->
+                                                                    </div>
+                                                                    @endforeach
+                                                                    {{--
                                                                     <div class="col-md-4 col-sm-6  col-xs-12">
                                                                         <div class="properties-box">
                                                                             <div class="properties-thumb">
@@ -76,6 +109,7 @@
                                                                                         <i class="fa  fa-building"> </i> <span>3   </span>
                                                                                     </li>
                                                                                 </ul>
+
                                                                                 <a href="'/property/show/' + post.id" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
 
                                                                                 <a href="'/property/edit/' + post.id" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
@@ -106,7 +140,6 @@
                                                                                         <i class="fa  fa-building"> </i> <span>3   </span>
                                                                                     </li>
                                                                                 </ul>
-
                                                                                 <a href="'/property/show/' + post.id" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
 
                                                                                 <a href="'/property/edit/' + post.id" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
@@ -117,37 +150,8 @@
                                                                             <h3><a href="property.html" title="">The Helux villa</a></h3>
                                                                             <span class="price">$444000</span>
                                                                         </div><!-- prop Box -->
-                                                                    </div>
-                                                                    <div class="col-md-4 col-sm-6  col-xs-12">
-                                                                        <div class="properties-box">
-                                                                            <div class="properties-thumb">
-                                                                                <img src="img/demo/property1.jpg" alt="">
-                                                                                <span class="spn-status"> For Rent </span>
-                                                                                <span class="spn-save"> <i class="ti ti-heart"></i> </span>
-                                                                                <ul class="property-info">
-                                                                                    <li>
-                                                                                        <i class="fa  fa-retweet"> </i> <span>1913 sqft </span>
-                                                                                    </li>
-                                                                                    <li class="li-rl"></li>
-                                                                                    <li>
-                                                                                        <i class="fa  fa-bed"></i><span>  5   </span>
-                                                                                    </li>
-                                                                                    <li class="li-rl"></li>
-                                                                                    <li>
-                                                                                        <i class="fa  fa-building"> </i> <span>3   </span>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <a href="'/property/show/' + post.id" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
-
-                                                                                <a href="'/property/edit/' + post.id" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
-
-                                                                                <a href="'/property/delete/' + post.id" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
-
-                                                                            </div>
-                                                                            <h3><a href="property.html" title="">The Helux villa</a></h3>
-                                                                            <span class="price">$444000</span>
-                                                                        </div><!-- prop Box -->
-                                                                    </div>
+                                                                    </div> 
+                                                                    --}}
                                                                 </div>
                                                                 <ul class="pagination">
                                                                     <li class="disabled"><a href="#" title=""><span>NEXT</span></a></li>
