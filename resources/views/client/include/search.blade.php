@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="search-form-submit">
-                    <button type="submit" class="btn-search">Search</button>
+                    <button type="button" class="btn-search">Search</button>
                 </div>
             </form>
         </div><!-- Services Sec -->

@@ -39,7 +39,7 @@ $user = \Illuminate\Support\Facades\Auth::user();
                             </div>
 
                             <div class="popup-client">
-                                <span><i class="fa fa-user" @click.prevent="show"></i> Signin / Signup</span>
+                                <span><i class="fa fa-user"></i> Signin / Signup</span>
                             </div>
                             <span class="menu-toggle"><i class="fa fa-bars"></i></span>
                             <nav>

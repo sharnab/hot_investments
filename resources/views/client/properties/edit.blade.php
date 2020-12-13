@@ -42,10 +42,10 @@
                             <div class="heading4">
                                 <h2>EDIT PROPERTY</h2>
                             </div>
-                            {!! Form::model($propertyData,['url' => route('property_update',$propertyData['id']), 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
+                            {!! Form::model($data,['url' => route('property_update',$data['id']), 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
                             {{ csrf_field() }}
                             {{method_field('PUT')}}
-                            @include('client.property.form',['submit'=>__('Save')])
+                            @include('client.properties.form',['submit'=>__('Save')])
                         </div>
                         <aside class="col-md-2 column">
                             &nbsp;

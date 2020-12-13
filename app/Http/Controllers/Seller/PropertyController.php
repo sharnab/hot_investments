@@ -62,7 +62,13 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        return view('client.properties.index');
+        if($token=$this->getToken())
+        {
+            $propertyData = $this->getPropertyByPropertyId($token, $id);
+            $data = $propertyData['property'] ;
+        }
+
+        return view('client.properties.view', compact('data'));
     }
 
     /**
@@ -73,7 +79,14 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        return view('client.properties.index');
+        if($token=$this->getToken())
+        {
+            $propertyData = $this->getPropertyByPropertyId($token, $id);
+            // dd($propertyList['property']);
+            $data = $propertyData['property'] ;
+        }
+
+        return view('client.properties.edit', compact('data'));
     }
 
     /**

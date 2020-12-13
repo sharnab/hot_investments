@@ -60,8 +60,11 @@
                                                                     <div class="col-md-4 col-sm-6  col-xs-12">
                                                                         <div class="properties-box">
                                                                             <div class="properties-thumb">
-                                                                                <!-- <img src="img/demo/property1.jpg" alt=""> -->
-                                                                                <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$property['photos'][0]}}">
+                                                                                @if(isset($property['photos'][0]))<!-- <img src="img/demo/property1.jpg" alt=""> -->
+                                                                                    <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$property['photos'][0]}}">
+                                                                                @else
+                                                                                    <img src="./assets/client/img/no-image.png">
+                                                                                @endif
                                                                                 <span class="spn-status"> For Rent </span>
                                                                                 <span class="spn-save"> <i class="ti ti-heart"></i> </span>
                                                                                 <ul class="property-info">
@@ -77,11 +80,11 @@
                                                                                         <i class="fa  fa-building"> </i> <span>{{ $property['walkability'] }}   </span>
                                                                                     </li>
                                                                                 </ul>
-                                                                                <a href="/property/show/{{$property['id']}}" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
+                                                                                <a href="{{route('property_show',$property['id'])}}" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
 
-                                                                                <a href="/property/edit/{{$property['id']}}" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
+                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
 
-                                                                                <a href="/property/delete/{{$property['id']}}" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
+                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
 
                                                                             </div>
                                                                             <h3><a href="property.html" title="">{{ $property['title'] }}</a></h3>
@@ -150,7 +153,7 @@
                                                                             <h3><a href="property.html" title="">The Helux villa</a></h3>
                                                                             <span class="price">$444000</span>
                                                                         </div><!-- prop Box -->
-                                                                    </div> 
+                                                                    </div>
                                                                     --}}
                                                                 </div>
                                                                 <ul class="pagination">
@@ -172,9 +175,9 @@
                             </section>
                         </div>
                         <aside class="col-md-3 column">
-                            {!! Form::open(['route' => 'property_store', 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!}
+                            {{-- {!! Form::open(['route' => 'property_store', 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!} --}}
                             @include('client.include.search')
-                            {{ Form::close() }}
+                            {{-- {{ Form::close() }} --}}
                         </aside>
                     </div>
                 </div>
@@ -182,4 +185,13 @@
         </div> <!-- panel -->
     </div> <!-- col-->
 </div>
+@endsection
+@section('scripts')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $('.btn-search').on('click', function(){
+            console.log('here');
+        });
+    </script>
 @endsection

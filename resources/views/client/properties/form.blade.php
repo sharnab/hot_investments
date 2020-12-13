@@ -1,4 +1,4 @@
-
+{{-- {{dd($data)}} --}}
                     <div class="submit-content">
                             <div class="control-group">
                                 <div class="group-title">Property Description &amp; Price</div>
@@ -6,25 +6,25 @@
                                     <div class="col-md-8">
                                         <div class="form-group s-prop-title">
                                             <label for="title">Title&nbsp;&#42;</label>
-                                            <input type="text" id="title" class="form-control title_name" value="{{ isset($propertyData['title'])?$propertyData['title']:'' }}" name="title_name" required="">
+                                            <input type="text" id="title" class="form-control title_name" value="{{ isset($data['title'])?$data['title']:'' }}" name="title_name" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group s-prop-area">
                                             <label for="area">Lot Size&nbsp;(sqft)</label>
-                                            <input type="text" id="lotSize" class="form-control area" value="{{ isset($propertyData['area'])?$propertyData['area']:'' }}" name="area">
+                                            <input type="text" id="lotSize" class="form-control area" value="{{ isset($data['lotSize'])?$data['lotSize']:'' }}" name="area">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group s-prop-desc">
                                             <label for="textarea">Description&nbsp;&#42;</label>
-                                            <textarea id="textarea" name="desc" rows="10" required="" style="width: 100%; border: 1px solid #ccc; border-radius: 4px" class="desc">"{{ isset($propertyData['desc'])?$propertyData['desc']:'' }}"</textarea>
+                                            <textarea id="textarea" name="desc" rows="10" required="" style="width: 100%; border: 1px solid #ccc; border-radius: 4px" class="desc">{{ isset($data['description'])?$data['description']:'' }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="price s-prop-bedrooms">
                                             <label for="price">Price&nbsp;&#42;&nbsp;(&#36;)</label>
-                                            <input type="text" id="price" class="form-control price" value="{{ isset($propertyData['price'])?$propertyData['price']:'' }}" name="price" required="">
+                                            <input type="text" id="price" class="form-control price" value="{{ isset($data['price'])?$data['price']:'' }}" name="price" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -32,11 +32,11 @@
                                             <label>Walkability</label>
                                             <div class="dropdown label-select" style="width: 100%">
                                                 <select class="form-control walkability" name="walkability" >
-                                                    <option value="1" {{ isset($propertyData['walkability']) && $propertyData['walkability'] == '1' ? 'selected' : '' }}>1</option>
-                                                    <option value="2" {{ isset($propertyData['walkability']) && $propertyData['walkability'] == '2' ? 'selected' : '' }}>2</option>
-                                                    <option value="3" {{ isset($propertyData['walkability']) && $propertyData['walkability'] == '3' ? 'selected' : '' }}>3</option>
-                                                    <option value="4" {{ isset($propertyData['walkability']) && $propertyData['walkability'] == '4' ? 'selected' : '' }}>4</option>
-                                                    <option value="5" {{ isset($propertyData['walkability']) && $propertyData['walkability'] == '5' ? 'selected' : '' }}>5</option>
+                                                    <option value="1" {{ isset($data['walkability']) && $data['walkability'] == '1' ? 'selected' : '' }}>1</option>
+                                                    <option value="2" {{ isset($data['walkability']) && $data['walkability'] == '2' ? 'selected' : '' }}>2</option>
+                                                    <option value="3" {{ isset($data['walkability']) && $data['walkability'] == '3' ? 'selected' : '' }}>3</option>
+                                                    <option value="4" {{ isset($data['walkability']) && $data['walkability'] == '4' ? 'selected' : '' }}>4</option>
+                                                    <option value="5" {{ isset($data['walkability']) && $data['walkability'] == '5' ? 'selected' : '' }}>5</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -46,9 +46,9 @@
                                             <label>Type</label>
                                             <div class="dropdown label-select" style="width: 100%">
                                                 <select class="form-control type" name="type">
-                                                    <option value="Duplex" {{ isset($propertyData['type']) && $propertyData['type'] == 'Duplex' ? 'selected' : '' }}>Duplex</option>
-                                                    <option value="Triplex" {{ isset($propertyData['type']) && $propertyData['type'] == 'Triplex' ? 'selected' : '' }}>Triplex</option>
-                                                    <option value="Fourplex" {{ isset($propertyData['type']) && $propertyData['type'] == 'Fourplex' ? 'selected' : '' }}>Fourplex</option>
+                                                    <option value="Duplex" {{ isset($data['type']) && $data['type'] == 'Duplex' ? 'selected' : '' }}>Duplex</option>
+                                                    <option value="Triplex" {{ isset($data['type']) && $data['type'] == 'Triplex' ? 'selected' : '' }}>Triplex</option>
+                                                    <option value="Fourplex" {{ isset($data['type']) && $data['type'] == 'Fourplex' ? 'selected' : '' }}>Fourplex</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -56,19 +56,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group s-prop-bedrooms">
                                             <label for="bedrooms">Bed Rooms</label>
-                                            <input type="number" id="bedrooms" class="form-control bedrooms" value="{{ isset($propertyData['bedrooms'])?$propertyData['bedrooms']:'' }}" name="bedrooms">
+                                            <input type="number" id="bedrooms" class="form-control bedrooms" value="{{ isset($data['bedrooms'])?$data['bedrooms']:'' }}" name="bedrooms">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group s-prop-bathrooms">
                                             <label for="bathrooms">Property Size</label>
-                                            <input type="number" id="propertySize" class="form-control propertySize" value="{{ isset($propertyData['propertySize'])?$propertyData['propertySize']:'' }}" name="propertySize">
+                                            <input type="number" id="propertySize" class="form-control propertySize" value="{{ isset($data['propertySize'])?$data['propertySize']:'' }}" name="propertySize">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group s-prop-bedrooms">
                                             <label for="bedrooms">Year Built</label>
-                                            <input type="number" id="yearBuilt" class="date-own form-control yearBuilt" value="{{ isset($propertyData['yearBuilt'])?$propertyData['yearBuilt']:'' }}" name="yearBuilt">
+                                            <input type="number" id="yearBuilt" class="date-own form-control yearBuilt" value="{{ isset($data['yearBuilt'])?$data['yearBuilt']:'' }}" name="yearBuilt">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -76,10 +76,10 @@
                                             <label for="facing">Facing</label>
                                             <div class="dropdown label-select" style="width: 100%">
                                                 <select class="form-control facing" name="facing">
-                                                    <option value="East" {{ isset($propertyData['facing']) && $propertyData['facing'] == 'East' ? 'selected' : '' }}>East</option>
-                                                    <option value="West" {{ isset($propertyData['facing']) && $propertyData['facing'] == 'West' ? 'selected' : '' }}>West</option>
-                                                    <option value="North" {{ isset($propertyData['facing']) && $propertyData['facing'] == 'North' ? 'selected' : '' }}>North</option>
-                                                    <option value="South" {{ isset($propertyData['facing']) && $propertyData['facing'] == 'South' ? 'selected' : '' }}>South</option>
+                                                    <option value="East" {{ isset($data['facing']) && $data['facing'] == 'East' ? 'selected' : '' }}>East</option>
+                                                    <option value="West" {{ isset($data['facing']) && $data['facing'] == 'West' ? 'selected' : '' }}>West</option>
+                                                    <option value="North" {{ isset($data['facing']) && $data['facing'] == 'North' ? 'selected' : '' }}>North</option>
+                                                    <option value="South" {{ isset($data['facing']) && $data['facing'] == 'South' ? 'selected' : '' }}>South</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -89,11 +89,11 @@
                                             <label for="crimeScore">Crime Score</label>
                                             <div class="dropdown label-select" style="width: 100%">
                                                 <select class="form-control crimeScore" name="crimeScore">
-                                                    <option value="1" {{ isset($propertyData['crimeScore']) && $propertyData['crimeScore'] == '1' ? 'selected' : '' }}>1</option>
-                                                    <option value="2" {{ isset($propertyData['crimeScore']) && $propertyData['crimeScore'] == '2' ? 'selected' : '' }}>2</option>
-                                                    <option value="3" {{ isset($propertyData['crimeScore']) && $propertyData['crimeScore'] == '3' ? 'selected' : '' }}>3</option>
-                                                    <option value="4" {{ isset($propertyData['crimeScore']) && $propertyData['crimeScore'] == '4' ? 'selected' : '' }}>4</option>
-                                                    <option value="5" {{ isset($propertyData['crimeScore']) && $propertyData['crimeScore'] == '5' ? 'selected' : '' }}>5</option>
+                                                    <option value="1" {{ isset($data['crimeScore']) && $data['crimeScore'] == '1' ? 'selected' : '' }}>1</option>
+                                                    <option value="2" {{ isset($data['crimeScore']) && $data['crimeScore'] == '2' ? 'selected' : '' }}>2</option>
+                                                    <option value="3" {{ isset($data['crimeScore']) && $data['crimeScore'] == '3' ? 'selected' : '' }}>3</option>
+                                                    <option value="4" {{ isset($data['crimeScore']) && $data['crimeScore'] == '4' ? 'selected' : '' }}>4</option>
+                                                    <option value="5" {{ isset($data['crimeScore']) && $data['crimeScore'] == '5' ? 'selected' : '' }}>5</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group s-prop-bathrooms">
                                             <label for="totalMonthlyRent">Total Monthly Rent</label>
-                                            <input type="number" id="totalMonthlyRent" class="form-control totalMonthlyRent" value="{{ isset($propertyData['totalMonthlyRent'])?$propertyData['totalMonthlyRent']:'' }}" name="totalMonthlyRent">
+                                            <input type="number" id="totalMonthlyRent" class="form-control totalMonthlyRent" value="{{ isset($data['totalMonthlyRent'])?$data['totalMonthlyRent']:'' }}" name="totalMonthlyRent">
                                         </div>
                                     </div>
                                 </div>
@@ -117,20 +117,20 @@
                                             {{ Form::file('upload_file[]',['id'=>'upload_file', 'onchange'=>"preview_image();", 'multiple'=>'true']) }}
                                         </div>
                                         <div id="image_preview">
-                                            @if(isset($rentConfigDocumentsData))
-                                                @foreach($rentConfigDocumentsData as $image)
+                                            @if(isset($data['photos']))
+                                                @foreach($data['photos'] as $image)
                                                     <div class='col-md-6'>
-                                                        <a href='#' onClick='delete_server_data({{$image->id}});' class='del_tag_{{$image->id}}'>
-                                                            <img src='{{url("/")}}/assets/admin/layout/img/close-icon.png' alt='Delete file icon' class='del_button_{{$image->id}} img_delete_btn'>
+                                                        <a href='#' onClick='delete_server_data({{$image}});' class='del_tag_{{$image}}'>
+                                                            <img src='{{url("/")}}/assets/client/layout/img/close-icon.png' alt='Delete file icon' class='del_button_{{$image}} img_delete_btn'>
                                                         </a>
-                                                        <a href='{{url("/")."/".$image->file_name}}' data-lightbox='current_uploaded_image' id='SocialMediaBadges'>
-                                                            <img src='{{url("/")."/".$image->file_name}}' width='80%' style='padding: 5px' class='img_{{$image->id}}'>
+                                                        <a href='{{url("http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/").$image}}' data-lightbox='current_uploaded_image' id='SocialMediaBadges'>
+                                                            <img src='{{url("http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/").$image}}' width='80%' style='padding: 5px' class='img_{{$image}}'>
                                                         </a>
                                                     </div>
                                                 @endforeach
                                             @endif
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group hidden">
                                             <div class="progress">
                                                 <div class="progress-bar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                                     0%
@@ -149,13 +149,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group s-prop-address">
                                             <label for="address">Address&nbsp;&#42;</label>
-                                            <textarea id="address" class="form-control address" name="address" rows="1" required="">{{ isset($propertyData['address'])?$propertyData['address']:'' }}</textarea>
+                                            <textarea id="address" class="form-control address" name="address" rows="1" required="">{{ isset($data['location']['address'])?$data['location']['address']:'' }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group s-prop-location">
                                             <label for="address">Location</label>
-                                            <input type="text" id="location" class="form-control location" value="{{ isset($propertyData['location'])?$propertyData['location']:'' }}" name="location">
+                                            <input type="text" id="location" class="form-control location" value="{{ isset($data['location']['description'])?$data['location']['description']:'' }}" name="location">
                                         </div>
                                     </div>
 
@@ -192,8 +192,8 @@
     @section('scripts')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets') }}/admin/layout/scripts/lightbox.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets') }}/admin/layout/scripts/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets') }}/client/layout/scripts/lightbox.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets') }}/client/layout/scripts/jquery.form.js"></script>
     <script>
 
         jQuery(".select2").select2({
@@ -211,7 +211,7 @@
             var total_file=document.getElementById("upload_file").files.length;
             for(var i=0;i<total_file;i++)
             {
-                $('#image_preview').append("<div class='col-md-6'><a href='#' onClick='remove_img("+i+");' class='del_tag_"+i+"'><img src='{{url("/")}}/assets/admin/layout/img/close-icon.png' alt='Delete file icon' class='del_button_"+i+" img_delete_btn'></a>"+"<a href='"+URL.createObjectURL(event.target.files[i])+"' data-lightbox='current_uploaded_image' id='SocialMediaBadges'><img src='"+URL.createObjectURL(event.target.files[i])+"' width='80%' style='padding: 5px' class='img_"+i+"'></a></div>");
+                $('#image_preview').append("<div class='col-md-6'><a href='#' onClick='remove_img("+i+");' class='del_tag_"+i+"'><img src='{{url("/")}}/assets/client/layout/img/close-icon.png' alt='Delete file icon' class='del_button_"+i+" img_delete_btn'></a>"+"<a href='"+URL.createObjectURL(event.target.files[i])+"' data-lightbox='current_uploaded_image' id='SocialMediaBadges'><img src='"+URL.createObjectURL(event.target.files[i])+"' width='80%' style='padding: 5px' class='img_"+i+"'></a></div>");
                 $('.progress').hide();
             }
             // $('.img_1').remove();
