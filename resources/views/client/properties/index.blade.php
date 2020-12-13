@@ -24,6 +24,9 @@
     #SocialMediaBadges img:hover {
         box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     }
+    .bookmark{
+        background-color: rgba(255, 13, 13, 0.79) !important;
+    }
 </style>
 <link rel="stylesheet" href="{{url('assets')}}/client/css/contents.css" type="text/css" />
 <link rel="stylesheet" href="{{ URL::asset('assets') }}/client/layout/css/lightbox.css">
@@ -66,7 +69,7 @@
                                                                                     <img src="./assets/client/img/no-image.png">
                                                                                 @endif
                                                                                 <span class="spn-status"> For Rent </span>
-                                                                                <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                                                                <span class="spn-save no-bookmark {{ $property['isBookmarked']? 'bookmark':'' }}" data-id="{{ $property['id'] }}" data-bookmark="{{ $property['isBookmarked'] }}"> <i class="ti ti-heart"></i> </span>
                                                                                 <ul class="property-info">
                                                                                     <li>
                                                                                         <i class="fa  fa-retweet"> </i> <span>{{ $property['propertySize'] }} sqft </span>
@@ -193,5 +196,35 @@
         $('.btn-search').on('click', function(){
             console.log('here');
         });
+        $('.no-bookmark').on('click', function(){
+            var ID = $(this).data('id');
+            var isBookmarked = $(this).data('isBookmarked');
+            console.log(ID);
+            console.log(isBookmarked);
+            $.ajax({
+                url: "{{ url('property/bookmark') }}",
+                type: 'POST',
+                contentType: 'application/json',
+                data:  JSON.stringify({"id": ID,"is_bookmarked": isBookmarked,_token: "{{ csrf_token() }}"}),
+
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.status) {
+                        if (isBookmarked) {
+                            $(this).removeClass("bookmark");
+                            $(this).data('isBookmarked',false);
+                        }else{
+                            $(this).addClass("bookmark");
+                            $(this).data('isBookmarked',true);
+                        }
+                    }
+                    console.log(data);
+                },
+                error: function () {
+                    console.log('error.');
+                }
+            });
+        });
+        
     </script>
 @endsection

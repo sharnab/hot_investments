@@ -114,7 +114,7 @@
                                     <div class="col-md-12" style="height: 50%">
                                         <div class="form-group">
                                             {{ Form::label('files', __("Select Files")) }}
-                                            {{ Form::file('upload_file[]',['id'=>'upload_file', 'onchange'=>"preview_image();", 'multiple'=>'true']) }}
+                                            {{ Form::file('upload_file',['id'=>'upload_file', 'onchange'=>"preview_image();", 'multiple'=>'true']) }}
                                         </div>
                                         <div id="image_preview">
                                             @if(isset($data['photos']))

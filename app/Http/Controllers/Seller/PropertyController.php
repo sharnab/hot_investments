@@ -47,10 +47,10 @@ class PropertyController extends Controller
     {
         if($token=$this->getToken())
         {
-            // dd($request->file('file')[0]->getClientOriginalName());
             $propertyList = $this->addProperty($token, $request);
-            // dd($propertyList['property']);
-            // $data['propertyList'] = $propertyList['property'] ;
+            session()->flash('message', $propertyList['message']);
+            session()->flash('class', '1');
+            return redirect()->route('property_create');
         }
     }
 
@@ -98,24 +98,23 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $bank = Bank::find($id);
 
-        $validatedData = $request->validate([
-            "name"          => "required",
-            "active_status" => "required",
-        ]);
+        // $validatedData = $request->validate([
+        //     "title"          => "required",
+        //     "id"             => "required",
+        // ]);
 
-        $data = array(
-            "name"          => $request->input('name'),
-            "active_status" => $request->input('active_status'),
-            "updated_by"    => Auth::id()
-        );
+        if($token=$this->getToken())
+        {
+            $propertyList = $this->updateProperty($token, $request,$id);
+            session()->flash('message', $propertyList['message']);
+            session()->flash('class', '1');
+            return redirect()->route('home');
+        }
 
-        $BankData = Bank::where('id',$id)->update($data);
-
-        session()->flash('message', 'Bank Updated Successfully !');
-        session()->flash('class', '1');
-        return redirect()->route('bank');
+        session()->flash('message', 'Something went wrong !');
+        session()->flash('class', '2');
+        return redirect()->back();
     }
 
     /**
@@ -196,34 +195,15 @@ class PropertyController extends Controller
 
         $header=array(
             // 'Content-Type:application/json',
-            'Content-Type:multipart/form-data',
+            'Content-type: multipart/form-data',
+            'Content-Type: application/json',
             'Authorization: Bearer '.$token,
         );
-        // $location = array(
-        //     'description' => $data->input('location_name'),
-        //     'type' => 'Point',
-        //     'address' => $data->input('address'),
-        //     'coordinates' => array($data->input('lat'),$data->input('lng'))
-        // );
-        // $requestData=array(
-        //     'title'           =>$data->input('title'),
-        //     'description'     =>$data->input('description'),
-        //     'price'           =>$data->input('price'),
-        //     'photos'          =>'',
-        //     'lotSize'         =>$data->input('lotSize'),
-        //     'location'        =>$location
-        //     // 'location'=>$data->input('location'),
-        // );
-        // $requestDataJson=json_encode($requestData);
 
         $requestData=array(
                     'title'                     => 'Test Data' ,
                     'description'               => 'Apartment with really good environment.' ,
                     'price'                     => '12000' ,
-                    'location[description]'     => 'Texas, USA' ,
-                    'location[address]'         => '1 Haven for Hope Way, San Antonio, TX 78207' ,
-                    'location[coordinates][0]'  => '-98.5027167' ,
-                    'location[coordinates][1]'  => '29.4383793' ,
                     'lotSize'                   => '1000' ,
                     'propertySize'              => '800',
                     'yearBuilt'                 => '2015',
@@ -233,6 +213,9 @@ class PropertyController extends Controller
                     'totalMonthlyRent'          => '600',
                     'walkability'               => '5',
                     'crimeScore'                => '1',
+                    'address'                   => '1 Haven for Hope Way, San Antonio, TX 78207 Texas, USA' ,
+                    'lat'                       => '29.4383793' ,
+                    'lng'                       => '115.2306538' ,
                 );
         // $requestData=array(
         //     'title'                     => $data->input('title_name') ,
@@ -253,10 +236,13 @@ class PropertyController extends Controller
         //     'crimeScore'                => $data->input('crimeScore'),
         // );
 
+        $requestData["photos"] = new \CurlFile($_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['type'], $_FILES['upload_file']['name']);
         // $i=0;
-        // foreach($data->file('file') as $image){
+        // foreach($data->file('upload_file') as $image){
         //     $path = $image->getRealPath();
-        //     $requestData["photos[$i]"] = "@/".$path;
+        //     $requestData["photos"] = "@/".$path;
+        //     // $requestData["photos"] = fopen($image->path(), 'r');
+
         //     $i++;
         // }
 
@@ -270,42 +256,133 @@ class PropertyController extends Controller
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         // dd($ch);
-        $result = curl_exec($ch);dd($result);
+        $result = curl_exec($ch);
         curl_close($ch);
 
         $allProperty = json_decode($result,true);
-        echo "<pre>";
-        print_r($allProperty);dd();
         if(isset($allProperty['status']) && $allProperty['status'])
-            return $allProperty['data'];
+            return $allProperty;
         else
             return false;
+
     }
 
-    public function addBookmark($id)
+    private function updateProperty($token, Request $request,$id)
     {
-        $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/bookmarkProperty";
+        $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/updateProperty";
 
         $header=array(
-            'Content-Type:application/json',
+            // 'Content-Type:application/json',
+            'Content-type: multipart/form-data',
+            'Content-Type: application/json',
             'Authorization: Bearer '.$token,
         );
-        $ch = curl_init($url);
-        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
-        // curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 
+        $requestData=array(
+                    'id'                        => $id ,
+                    'title'                     => $request->input('title_name') ,
+                    'description'               => $request->input('desc') ,
+                );
+       
+
+        // $requestData["photos"] = new \CurlFile($_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['type'], $_FILES['upload_file']['name']);
+        // $i=0;
+        // foreach($data->file('upload_file') as $image){
+        //     $path = $image->getRealPath();
+        //     $requestData["photos"] = "@/".$path;
+        //     // $requestData["photos"] = fopen($image->path(), 'r');
+
+        //     $i++;
+        // }
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "PATCH");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $requestData);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        // dd($ch);
         $result = curl_exec($ch);
+        curl_close($ch);
+
         $allProperty = json_decode($result,true);
-        // echo "<pre>";
-        // print_r($allProperty);dd();
         if(isset($allProperty['status']) && $allProperty['status'])
-            return $allProperty['data'];
+            return $allProperty;
         else
             return false;
+
     }
+
+    public function addBookmark(Request $request)
+    {
+        $isBookmarked = $request->input('is_bookmarked');
+        $id = $request->input('id');
+
+        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNTBjN2E3NTUxYWQ4MGJhMjI2MzYyNSIsImlhdCI6MTYwNzg4MTUwNywiZXhwIjoxNjE1NjU3NTA3fQ.51jecwM1cvvZqywdFMRnfPdRIuYthHnsvh0Y_VGLbr0";
+
+        if ($isBookmarked)
+            $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/removeBookmarkProperty";
+        else
+            $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/bookmarkProperty";
+
+
+        $header=array(
+            // 'Content-Type:application/json',
+            'Authorization: Bearer '.$token,
+        );
+        $requestData=array(
+            'id'     => $id 
+        );
+
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $requestData);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+
+        $result = curl_exec($ch);
+        echo $result;
+        // $allProperty = json_decode($result,true);
+        // echo "<pre>";
+        // print_r($allProperty);dd();
+        // if(isset($allProperty['status']) && $allProperty['status'])
+        //     return $allProperty['data'];
+        // else
+        //     return false;
+    }
+
+    // public function removeBookmark($id)
+    // {
+    //     $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/removeBookmarkProperty";
+
+    //     $header=array(
+    //         // 'Content-Type:application/json',
+    //         'Authorization: Bearer '.$token,
+    //     );
+    //     $requestData=array(
+    //         'id'     => $id 
+    //     );
+        
+    //     $ch = curl_init($url);
+    //     curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
+    //     curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "POST");
+    //     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch,CURLOPT_POSTFIELDS, $requestData);
+    //     curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+
+    //     $result = curl_exec($ch);
+    //     $allProperty = json_decode($result,true);
+    //     echo "<pre>";
+    //     print_r($allProperty);dd();
+    //     if(isset($allProperty['status']) && $allProperty['status'])
+    //         return $allProperty['data'];
+    //     else
+    //         return false;
+    // }
 
     public function imageStorage(Request $request){
         $globals['images'] = $request->file->getClientOriginalExtension();

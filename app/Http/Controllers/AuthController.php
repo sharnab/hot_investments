@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
-use \GuzzleHttp\Client as GuzzleClient;
-
-class HomeController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +15,12 @@ class HomeController extends Controller
     public function index()
     {
         $propertyList = array();
-        // if($token=$this->getToken())
-        // {
-            $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNTBjN2E3NTUxYWQ4MGJhMjI2MzYyNSIsImlhdCI6MTYwNzg4MTUwNywiZXhwIjoxNjE1NjU3NTA3fQ.51jecwM1cvvZqywdFMRnfPdRIuYthHnsvh0Y_VGLbr0";
+        if($token=$this->getToken())
+        {
             $propertyList = $this->getAllApprovedProperty($token);
             $data['propertyList'] = $propertyList['property'] ;
             // dd($propertyList['property']);
-        // }
+        }
         // api for home page goes here
         return view('client.properties.index', $data);
     }
@@ -54,7 +50,7 @@ class HomeController extends Controller
             return false;
     }
 
-    private function getToken()
+    public function Login()
     {
         $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/users/login";
 
@@ -65,7 +61,6 @@ class HomeController extends Controller
         $requestDataJson=json_encode($requestData);
         $header=array(
             'Content-Type:application/json',
-            // 'authorization: '.$token,
         );
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
@@ -80,7 +75,8 @@ class HomeController extends Controller
         // echo "<pre>";
         // print_r($tokenInfo);dd();
         if(isset($tokenInfo['status']) && $tokenInfo['status'])
-            return $tokenInfo['token'];
+            session()->put('api_token',$tokenInfo['token']);
+            // return $tokenInfo['token'];
         else
             return false;
     }

@@ -49,4 +49,6 @@ Route::prefix('admin')->group(function () {
 // Route::get('/{any}', function () {
 //   return view('client.home.index');
 // })->where('any', '.*');
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
+
+    Route::post('/property/bookmark', 'Seller\PropertyController@addBookmark')->name('add_bookmark');
