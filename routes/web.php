@@ -38,7 +38,7 @@ Route::prefix('admin')->group(function () {
 	Route::get('/profile/edit/{id}', 'Seller\ProfileController@edit')->name('profile_edit');
 	Route::put('/profile/update/{id}', 'Seller\ProfileController@update')->name('profile_update');
 
-	Route::get('/chat', 'Seller\ChatController@index')->name('chat');
+	Route::get('/chat/{id}', 'Seller\ChatController@index')->name('chat');
 	Route::get('/message', 'Seller\MessageController@index')->name('message');
 	Route::post('/message', 'Seller\MessageController@store')->name('message.store');
     // Route::get('/seller/login', 'Auth\LoginController@login')->name('login');

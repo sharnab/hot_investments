@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="label-select">
-                                <select class="form-control">
+                                <select class="form-control" name="s_furnishing_status">
                                     <option value=''>Furnishing Status</option>
                                     <option value='Furnished'>Furnished</option>
                                     <option value='SemiFurnished'>Semi Furnished</option>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="label-select">
-                                <select class="form-control">
+                                <select class="form-control" name="s_construction_status">
                                     <option value=''>Construction Status</option>
                                     <option value='newly_launched'>Newly Launched</option>
                                     <option value='ready_to_move'>Ready To Move</option>
@@ -54,6 +54,13 @@
                                 </select>
                             </div>
                         </div>
+                        {{-- <div class="form-group col-md-12">
+                            <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                            <div style="margin:30px auto">
+                                <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
+                                <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" />
+                        	</div>
+                        </div> --}}
                         <div class="form-group col-md-12">
                             <span class="gprice-label">Price</span>
                             <input type="text" class="span2" value="" data-slider-min="0"
@@ -75,3 +82,11 @@
         </div><!-- Services Sec -->
     </div><!-- Category Widget -->
 </aside>
+
+{{-- @section('scripts')
+    <script>
+        $('.btn-search').on('click', function(){
+            console.log($('#price-range').val());
+        })
+    </script>
+@endsection --}}

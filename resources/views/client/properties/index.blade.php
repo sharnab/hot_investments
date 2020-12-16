@@ -11,20 +11,23 @@
         width: 20px;
         position: absolute;
     }
-    #SocialMediaBadges img{
-        float:left;
-        width:120px;
-        height:90px;
-        margin:5px;
+
+    #SocialMediaBadges img {
+        float: left;
+        width: 120px;
+        height: 90px;
+        margin: 5px;
         border: 1px solid #ddd;
         border-radius: 4px;
         padding: 5px;
         width: 150px;
     }
+
     #SocialMediaBadges img:hover {
         box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     }
-    .bookmark{
+
+    .bookmark {
         background-color: rgba(255, 13, 13, 0.79) !important;
     }
 </style>
@@ -64,33 +67,39 @@
                                                                         <div class="properties-box">
                                                                             <div class="properties-thumb">
                                                                                 @if(isset($property['photos'][0]))<!-- <img src="img/demo/property1.jpg" alt=""> -->
-                                                                                    <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$property['photos'][0]}}">
+                                                                                <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$property['photos'][0]}}">
                                                                                 @else
-                                                                                    <img src="./assets/client/img/no-image.png">
+                                                                                <img src="./assets/client/img/no-image.png">
                                                                                 @endif
                                                                                 <span class="spn-status"> For Rent </span>
-                                                                                <span class="spn-save no-bookmark {{ $property['isBookmarked']? 'bookmark':'' }}" data-id="{{ $property['id'] }}" data-bookmark="{{ $property['isBookmarked'] }}"> <i class="ti ti-heart"></i> </span>
+                                                                                <span class="spn-save no-bookmark {{ $property['isBookmarked']? 'bookmark':'' }}" data-id="{{ $property['id'] }}" data-bookmark="{{ $property['isBookmarked'] }}"> <i
+                                                                                        class="ti ti-heart"></i> </span>
                                                                                 <ul class="property-info">
                                                                                     <li>
                                                                                         <i class="fa  fa-retweet"> </i> <span>{{ $property['propertySize'] }} sqft </span>
                                                                                     </li>
                                                                                     <li class="li-rl"></li>
                                                                                     <li>
-                                                                                        <i class="fa  fa-bed"></i><span>  {{ $property['bedrooms'] }}   </span>
+                                                                                        <i class="fa  fa-bed"></i><span> {{ isset($property['bedrooms'])?$property['bedrooms']:'N/A' }} </span>
                                                                                     </li>
                                                                                     <li class="li-rl"></li>
                                                                                     <li>
-                                                                                        <i class="fa  fa-building"> </i> <span>{{ $property['walkability'] }}   </span>
+                                                                                        <i class="fa  fa-building"> </i> <span>{{ isset($property['walkability'])?$property['walkability']:'N/A' }} </span>
                                                                                     </li>
                                                                                 </ul>
-                                                                                <a href="{{route('property_show',$property['id'])}}" class="proeprty-sh-more btn btn-primary btn-sm" style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
+                                                                                <a href="{{route('property_show',$property['id'])}}" class="proeprty-sh-more btn btn-primary btn-sm"
+                                                                                    style="width:50%;margin-left:25%;font-size:1em;margin-top:5%;margin-bottom:5%"><i class="ti ti-eye"></i> View</a>
 
-                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
+                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-info btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'"
+                                                                                    style="width:50%;margin-left:25%;font-size:1em;margin-top:-10%;margin-bottom:5%"><i class="ti ti-pencil-alt"></i> Edit</a>
 
-                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'" style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
+                                                                                <a href="{{route('property_edit',$property['id'])}}" class="proeprty-sh-more btn btn-danger btn-sm" v-if="post.seller.id=='5f50c7a7551ad80ba2263625'"
+                                                                                    style="width:50%;margin-left:25%;font-size:1em;margin-top:20%;margin-bottom:5%"><i class="ti ti-trash"></i> Delete</a>
 
                                                                             </div>
                                                                             <h3><a href="property.html" title="">{{ $property['title'] }}</a></h3>
+                                                                            <span style="padding-left: 8em"><img src='./assets/client/img/flame.jpg' style="width: 10%"><span
+                                                                                    style="margin-bottom: 4px; color: #c94046; font-size: 1.2em">{{ $property['hotLevel'] }}/5</span></span>
                                                                             <span class="price">${{ $property['price'] }}</span>
                                                                         </div><!-- prop Box -->
                                                                     </div>
@@ -190,41 +199,57 @@
 </div>
 @endsection
 @section('scripts')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $('.btn-search').on('click', function(){
-            console.log('here');
-        });
-        $('.no-bookmark').on('click', function(){
-            var ID = $(this).data('id');
-            var isBookmarked = $(this).data('isBookmarked');
-            console.log(ID);
-            console.log(isBookmarked);
-            $.ajax({
-                url: "{{ url('property/bookmark') }}",
-                type: 'POST',
-                contentType: 'application/json',
-                data:  JSON.stringify({"id": ID,"is_bookmarked": isBookmarked,_token: "{{ csrf_token() }}"}),
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
-                success: function (data) {
-                    data = JSON.parse(data);
-                    if (data.status) {
-                        if (isBookmarked) {
-                            $(this).removeClass("bookmark");
-                            $(this).data('isBookmarked',false);
-                        }else{
-                            $(this).addClass("bookmark");
-                            $(this).data('isBookmarked',true);
-                        }
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target.getAttribute('name') == 'loginModal') {
+            // modal.style.display = "none";
+            setTimeout(function() {
+                modal.style.display = "none";
+            },200);
+        }
+    }
+    $('.btn-search').on('click', function() {
+        console.log('here');
+    });
+    $('.no-bookmark').on('click', function() {
+        var ID = $(this).data('id');
+        var isBookmarked = $(this).data('isBookmarked');
+        console.log(ID);
+        console.log(isBookmarked);
+        $.ajax({
+            url: "{{ url('property/bookmark') }}",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "id": ID,
+                "is_bookmarked": isBookmarked,
+                _token: "{{ csrf_token() }}"
+            }),
+
+            success: function(data) {
+                data = JSON.parse(data);
+                if (data.status) {
+                    if (isBookmarked) {
+                        $(this).removeClass("bookmark");
+                        $(this).data('isBookmarked', false);
+                    } else {
+                        $(this).addClass("bookmark");
+                        $(this).data('isBookmarked', true);
                     }
-                    console.log(data);
-                },
-                error: function () {
-                    console.log('error.');
                 }
-            });
+                console.log(data);
+            },
+            error: function() {
+                console.log('error.');
+            }
         });
-        
-    </script>
+    });
+</script>
 @endsection

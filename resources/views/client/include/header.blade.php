@@ -18,8 +18,9 @@ $user = \Illuminate\Support\Facades\Auth::user();
 
 <!-- REVOLUTION STYLE SHEETS -->
 <link rel="stylesheet" type="text/css" href="{{asset('/assets/client/js/rs-plugin/css/settings.css')}}">
+@include('client.layouts.login')
 {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrsRbcMCwCrRURPbjGpzcF4EMjHYVVDr4&libraries=places"></script> --}}
-<div class="page-header navbar navbar-fixed-top" style="margin-top: 0px" >
+<div class="page-header navbar navbar-fixed-top" style="margin-top: 0px">
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
@@ -32,38 +33,35 @@ $user = \Illuminate\Support\Facades\Auth::user();
                             <div class="logo">
                                 <a href="index.html" title="">
                                     <i class="" style="width: 18px; padding-top: 50%">
-                                        <img class="homepage-logo" src="{{url('/')}}/assets/global/img/logo.png" style="width:4.5em"/>
+                                        <img class="homepage-logo" src="{{url('/')}}/assets/global/img/logo.png" style="width:4.5em" />
                                         <strong style="width:200px;"><i class="sub-title">Investment Properties</i></strong>
                                     </i>
                                 </a>
                             </div>
 
                             <div class="popup-client">
-                                <span><i class="fa fa-user"></i> Signin / Signup</span>
+                                <span onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-user"></i> Signin / Signup</span>
                             </div>
                             <span class="menu-toggle"><i class="fa fa-bars"></i></span>
                             <nav>
                                 <ul>
-                                    <li class="menu-item-has-children">
-                                        <a href="#" title="">HOME</a>
-                                        <ul>
-                                            <li><a href="index.html" title="">Home</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href={{route('home')}} title="">Home</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#" title="">PROPERTIES</a>
                                         <ul>
-                                            <li><a href="properties3.html" title="">Properties- Super </a></li>
-                                            <li><a href="properties.html" title="">Properties- List</a></li>
-                                            <li><a href="properties2.html" title="">Properties- Grid</a></li>
-                                            <li><a href="property.html" title="">Property details</a></li>
+                                            <li><a href="properties3.html" title="">My Entries</a></li>
+                                            <li><a href="properties.html" title="">Bookmarked</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="property.html" title="">PROPERTY</a></li>
+                                    <li><a href="property.html" title="">Messages</a></li>
 
-                                    <li><a href="contact.html" title="">CONTACT</a></li>
                                 </ul>
                             </nav>
+
+                            <!-- modal -->
+
+
+                            <!-- modal end    -->
 
                         </div>
                     </div>

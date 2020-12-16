@@ -82,12 +82,12 @@
                                                         <div class="row">
                                                             <div class="col-md-12" style="">
                                                                 <div class="pull-left property_name" style="margin-top: 5%; font-weight: bold; ">{{ $data['title'] }}</div>
-                                                                <div class="pull-right property_date" style="margin-top: 5%; ">Posted on: 04 Aug 2020 <a class='bookmark' :href="bookmarkProperty()"><i class="fa fa-bookmark"></i></a></div>
+                                                                <div class="pull-right property_date" style="margin-top: 5%; ">Posted on: 04 Aug 2020 <a class='bookmark' href="bookmarkProperty()" {{($data['isBookmarked']==True)?'style="color:red"':'style="color:black"'}} ><i class="fa fa-bookmark"></i></a></div>
                                                             </div>
                                                             <div class="col-md-12 address_block">
                                                                 <div class="pull-left property_address" style="font-weight: 400; "><i class='fa fa-map-marker' style="color: #c94046; padding-right: 5px"></i>{{ $data['location']['address'] }}</div>
                                                                 <div class="pull-right" style="text-align: right">
-                                                                    <img src='../../assets/client/img/flame.jpg' style="width: 2%"></image-rating><span style="margin-bottom: 4px">{{ $data['hotLevel'] }}/5</span>
+                                                                    <img src='../../assets/client/img/flame.jpg' style="width: 2%"><span style="margin-bottom: 4px">{{ $data['hotLevel'] }}/5</span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
@@ -163,33 +163,7 @@
                                                 </div><!-- Blog POst Sec -->
                                             {{-- </div> --}}
                                             <aside class="col-md-3 column">
-
-                                                <div class="agent_bg_widget widget">
-                                                    <div class="agent_widget">
-                                                        <div class="agent_pic">
-                                                            <a href="agent.html" title="">
-                                                                @if(isset($data['seller']['photo']))
-                                                                <img src="{{ url("http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/").$data['seller']['photo'] }}" alt="" />
-                                                                @else
-                                                                <img src="../../uploads/demo-user.png" alt="" />
-                                                                @endif
-                                                                <h5>{{ $data['seller']['name'] }}</h5>
-                                                            </a>
-                                                        </div>
-
-                                                        <!-- <div>
-                                                            <span><i class="fa fa-phone"> </i> +1 9090909090</span>
-                                                        </div>
-                                                        <div>
-                                                            <span><i class="fa fa-envelope"> </i> agent@company.com</span>
-                                                        </div> -->
-
-                                                        <!-- <a href="agent.html" title="" class="btn contact-agent">Find more</a> -->
-                                                        <a href="agent.html" title="" class="btn contact-agent" style="background-color: black; margin: 10px; margin-top: 20px"><i class="fa fa-comments-o"></i> Message Seller</a>
-                                                        <a href="agent.html" title="" class="btn contact-agent" style="margin: 10px"><i class="fa fa-money"></i> Make Offer</a>
-                                                    </div>
-                                                </div><!-- Follow Widget -->
-
+                                                @include('client.include.seller_info')
                                             </aside>
                                         </div>
                                     </div>
