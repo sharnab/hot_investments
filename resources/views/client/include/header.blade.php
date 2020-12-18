@@ -49,8 +49,8 @@ $user = \Illuminate\Support\Facades\Auth::user();
                                     <li class="menu-item-has-children">
                                         <a href="#" title="">PROPERTIES</a>
                                         <ul>
-                                            <li><a href="properties3.html" title="">MY ENTRIES</a></li>
-                                            <li><a href="properties.html" title="">BOOKMARKS</a></li>
+                                            <li><a href={{route('my_properties', '5f8f0148a802bc4a96246922')}} title="">MY ENTRIES</a></li>
+                                            <li><a href={{route('bookmarked_properties'/*$bank['id']*/)}} title="">BOOKMARKS</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="property.html" title="">MESSAGES</a></li>

@@ -108,6 +108,7 @@
                                                                         </div><!-- prop Box -->
                                                                     </div>
                                                                     @endforeach
+
                                                                     {{--
                                                                     <div class="col-md-4 col-sm-6  col-xs-12">
                                                                         <div class="properties-box">
@@ -191,8 +192,13 @@
                             </section>
                         </div>
                         <aside class="col-md-4 column" style="width: 30%">
-                            {{-- {!! Form::open(['route' => 'property_store', 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!} --}}
                             @include('client.include.search')
+                            {{-- @if (Request::segment(1) == 'my_properties')
+                                @include('client.include.seller_info') --}}
+                            {{-- {!! Form::open(['route' => 'property_store', 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!} --}}
+                            {{-- @else
+                                @include('client.include.search')
+                            @endif --}}
                             {{-- {{ Form::close() }} --}}
                         </aside>
                     </div>

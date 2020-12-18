@@ -29,6 +29,8 @@ Route::prefix('admin')->group(function () {
 	Route::get('/signin', 'Seller\DashboardController@index')->name('signin');
 	Route::get('/signup', 'Seller\DashboardController@index')->name('signup');
     Route::get('/seller', 'Seller\DashboardController@index')->name('seller_dashboard');
+	Route::get('/my_properties/{id}', 'Seller\PropertyController@my_properties')->name('my_properties');
+	Route::get('/bookmarked_properties', 'Seller\PropertyController@bookmarked_properties')->name('bookmarked_properties');
     Route::get('/property/create', 'Seller\PropertyController@create')->name('property_create');
     Route::post('/property/store', 'Seller\PropertyController@store')->name('property_store');
 	Route::get('/property/edit/{id}', 'Seller\PropertyController@edit')->name('property_edit');

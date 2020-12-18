@@ -283,7 +283,7 @@ class PropertyController extends Controller
                     'title'                     => $request->input('title_name') ,
                     'description'               => $request->input('desc') ,
                 );
-       
+
 
         // $requestData["photos"] = new \CurlFile($_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['type'], $_FILES['upload_file']['name']);
         // $i=0;
@@ -334,7 +334,7 @@ class PropertyController extends Controller
             'Authorization: Bearer '.$token,
         );
         $requestData=array(
-            'id'     => $id 
+            'id'     => $id
         );
 
         $ch = curl_init($url);
@@ -364,9 +364,9 @@ class PropertyController extends Controller
     //         'Authorization: Bearer '.$token,
     //     );
     //     $requestData=array(
-    //         'id'     => $id 
+    //         'id'     => $id
     //     );
-        
+
     //     $ch = curl_init($url);
     //     curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
     //     curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "POST");
@@ -397,6 +397,31 @@ class PropertyController extends Controller
         return $propertyData;
     }
 
+    public function my_properties($id)
+    {
+        if($token=$this->getToken())
+        {
+            $propertyList = $this->getMyProperty($token, $id);
+            // dd($propertyList['property']);
+            $data['propertyList'] = $propertyList['property'] ;
+        }
+
+        return view('client.properties.index', $data);
+    }
+
+    public function bookmarked_properties()
+    {
+        if($token=$this->getToken())
+        {
+            $propertyList = $this->getBookmarkedProperty($token);
+            // dd($propertyList['property']);
+            $data['propertyList'] = $propertyList['property'] ;
+        }
+
+
+        return view('client.properties.index', $data);
+    }
+
     private function getPropertyByPropertyId($token, $propertyID)
     {
         $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/getSingle/$propertyID";
@@ -421,4 +446,55 @@ class PropertyController extends Controller
         else
             return false;
     }
+
+    private function getMyProperty($token, $id)
+    {
+        $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/getMyListings/".$id;
+
+        $header=array(
+            'Content-Type:application/json',
+            'Authorization: Bearer '.$token,
+        );
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+        // curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
+        $result = curl_exec($ch);
+        $allProperty = json_decode($result,true);
+        // echo "<pre>";
+        // print_r($allProperty);dd();
+        if(isset($allProperty['status']) && $allProperty['status'])
+            return $allProperty['data'];
+        else
+            return false;
+    }
+
+    private function getBookmarkedProperty($token)
+    {
+        $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/bookmarks/getMyBookmarks";
+
+        $header=array(
+            'Content-Type:application/json',
+            'Authorization: Bearer '.$token,
+        );
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+        // curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
+        $result = curl_exec($ch);
+        $allProperty = json_decode($result,true);
+        // echo "<pre>";
+        // print_r($allProperty);dd();
+        if(isset($allProperty['status']) && $allProperty['status'])
+            return $allProperty['data'];
+        else
+            return false;
+    }
+
 }

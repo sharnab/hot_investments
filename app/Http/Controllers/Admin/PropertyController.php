@@ -43,7 +43,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         if($token=$this->getToken())
         {
             $propertyList = $this->addProperty($token);
@@ -119,7 +119,7 @@ class PropertyController extends Controller
         if($token=$this->getToken())
         {
             $propertyList = $this->approveProperty($token,$id);
-            if ($propertyList) 
+            if ($propertyList)
                 return 'approve';
             else
                 return redirect()->back();
@@ -133,7 +133,7 @@ class PropertyController extends Controller
         $fireID = '4aaFPVT6o7OzxvWTWzwPgmtWwYN2';
         $requestData=array(
             'firebaseUID'=>$fireID
-        );          
+        );
         $requestDataJson=json_encode($requestData);
         $header=array(
             'Content-Type:application/json',
@@ -146,7 +146,7 @@ class PropertyController extends Controller
         curl_setopt($ch,CURLOPT_POSTFIELDS, $requestDataJson);
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        
+
         $result = curl_exec($ch);
         $tokenInfo = json_decode($result,true);
         // echo "<pre>";
@@ -160,7 +160,7 @@ class PropertyController extends Controller
     private function getAllProperty($token)
     {
         $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/admin/getAllProperty";
-      
+
         $header=array(
             'Content-Type:application/json',
             'Authorization: Bearer '.$token,
@@ -171,7 +171,7 @@ class PropertyController extends Controller
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
         // curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        
+
         $result = curl_exec($ch);
         $allProperty = json_decode($result,true);
         // echo "<pre>";
@@ -185,7 +185,7 @@ class PropertyController extends Controller
     private function addProperty($token)
     {
         $url = "http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/api/v1/property/createProperty";
-      
+
         $header=array(
             'Content-Type:application/json',
             'Authorization: Bearer '.$token,
@@ -202,7 +202,7 @@ class PropertyController extends Controller
             'price'=>'14000',
             'photos' => '',
             'location'=>$location
-        ); 
+        );
         $requestDataJson=json_encode($requestData);
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
@@ -211,7 +211,7 @@ class PropertyController extends Controller
         curl_setopt($ch,CURLOPT_POSTFIELDS, $requestDataJson);
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
         // curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        
+
         $result = curl_exec($ch);
         $allProperty = json_decode($result,true);
         echo "<pre>";
@@ -249,12 +249,11 @@ class PropertyController extends Controller
         $result = curl_exec($ch);
 
         $allProperty = json_decode($result,true);
-        
+
         if(isset($allProperty['status']) && $allProperty['status'])
             return $allProperty['message'];
         else
             return false;
     }
-
-
+    
 }
