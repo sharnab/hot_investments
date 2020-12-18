@@ -40,13 +40,13 @@
             <div class="panel-body">
                 <div class="container">
                     <div>
-                        <div class="col-md-9 column">
+                        <div class="col-md-8 column" style="width: 70%">
                             <section class="block" style="padding-top: 0%">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-9 column">
+                                                <div class="col-md-8 column" style="width: 70%">
                                                     <div class="properties-sec">
                                                         <div class="properties-list">
                                                             <div class="filter-wrapper">
@@ -98,9 +98,13 @@
 
                                                                             </div>
                                                                             <h3><a href="property.html" title="">{{ $property['title'] }}</a></h3>
-                                                                            <span style="padding-left: 8em"><img src='./assets/client/img/flame.jpg' style="width: 10%"><span
-                                                                                    style="margin-bottom: 4px; color: #c94046; font-size: 1.2em">{{ $property['hotLevel'] }}/5</span></span>
-                                                                            <span class="price">${{ $property['price'] }}</span>
+                                                                            <span class="price">
+                                                                                ${{ $property['price'] }}
+                                                                                <span style="padding-left: 3.5em">
+                                                                                    <img src='./assets/client/img/flame.jpg' style="width: 10%">
+                                                                                    <span style="margin-bottom: 4px; color: #c94046; font-size: 0.8em">{{ $property['hotLevel'] }}/5</span>
+                                                                                </span>
+                                                                            </span>
                                                                         </div><!-- prop Box -->
                                                                     </div>
                                                                     @endforeach
@@ -186,7 +190,7 @@
                                 </div>
                             </section>
                         </div>
-                        <aside class="col-md-3 column">
+                        <aside class="col-md-4 column" style="width: 30%">
                             {{-- {!! Form::open(['route' => 'property_store', 'method'=>'post', 'enctype'=>"multipart/form-data"]) !!} --}}
                             @include('client.include.search')
                             {{-- {{ Form::close() }} --}}

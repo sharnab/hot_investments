@@ -1,5 +1,5 @@
 <div class="control-group">
-    <div class="group-title">Welcome back, {{ $profileData['title'] }} </div>
+    <div class="group-title">Welcome back, {{ $profileData['name'] }} </div>
     <div class="group-container row">
         <div class="col-md-12">
             <div class="row">
@@ -8,22 +8,22 @@
 
                     <div class="form-group s-profile-title">
                         <label for="title">Name&nbsp;*</label>
-                        <input id="title" class="form-control" value={{ $profileData['title'] }} name="title" required="" type="text">
+                        <input id="title" class="form-control" value={{ $profileData['name'] }} name="name" required="" type="text">
                     </div>
-                    <div class="form-group s-profile-email">
-                        <label for="email">Email&nbsp;*</label>
-                        <input id="email" class="form-control" value={{ $profileData['email'] }} name="email" required="" type="text">
-                    </div>
+
 
                 </div>
 
                 <div class="col-md-6">
 
-
-                    <div class="form-group s-profile-phone">
+                    <div class="form-group s-profile-email">
+                        <label for="email">Email&nbsp;*</label>
+                        <input id="email" class="form-control" value={{ $profileData['email'] }} name="email" required="" type="text">
+                    </div>
+                    {{-- <div class="form-group s-profile-phone">
                         <label for="phone">Phone</label>
                         <input id="phone" class="form-control" value={{ $profileData['phone'] }} name="phone" type="text">
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -45,13 +45,13 @@
                             {{ Form::file('upload_file',['id'=>'upload_file', 'onchange'=>"preview_image();"]) }}
                         </div>
                         <div id="image_preview">
-                            @if(isset($profileData) && !empty($profileData['file_name']))
+                            @if(isset($profileData) && !empty($profileData['photo']))
                                 <div class='col-md-6'>
                                     <a href='#' onClick='delete_server_data({{$profileData['id']}});' class='del_tag_{{$profileData['id']}}'>
-                                        <img src='{{url("/")}}/assets/admin/layout/img/close-icon.png' alt='Delete file icon' class='del_button_{{$profileData['id']}} img_delete_btn'>
+                                        <img src='{{url("/")}}/assets/client/layout/img/close-icon.png' alt='Delete file icon' class='del_button_{{$profileData['id']}} img_delete_btn'>
                                     </a>
-                                    <a href='{{url("/")."/".$profileData['file_name']}}' data-lightbox='current_uploaded_image' id='SocialMediaBadges'>
-                                        <img src='{{url("/")."/".$profileData['file_name']}}' width='80%' style='padding: 5px' class='img_{{$profileData['id']}}'>
+                                    <a href="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$profileData['photo']}}" data-lightbox='current_uploaded_image' id='SocialMediaBadges'>
+                                        <img src="http://ec2-52-14-234-54.us-east-2.compute.amazonaws.com/{{$profileData['photo']}}" width='80%' style='padding: 5px' class='img_{{$profileData['id']}}'>
                                     </a>
                                 </div>
                             @endif

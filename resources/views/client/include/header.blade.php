@@ -45,15 +45,22 @@ $user = \Illuminate\Support\Facades\Auth::user();
                             <span class="menu-toggle"><i class="fa fa-bars"></i></span>
                             <nav>
                                 <ul>
-                                    <li><a href={{route('home')}} title="">Home</a></li>
+                                    <li><a href={{route('home')}} title="">HOME</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#" title="">PROPERTIES</a>
                                         <ul>
-                                            <li><a href="properties3.html" title="">My Entries</a></li>
-                                            <li><a href="properties.html" title="">Bookmarked</a></li>
+                                            <li><a href="properties3.html" title="">MY ENTRIES</a></li>
+                                            <li><a href="properties.html" title="">BOOKMARKS</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="property.html" title="">Messages</a></li>
+                                    <li><a href="property.html" title="">MESSAGES</a></li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#" title="">Hello, username</a>
+                                        <ul>
+                                            <li><a href={{route('profile_edit','5f8f0148a802bc4a96246922'/*$bank['id']*/)}} title="">MY PROFILE</a></li>
+                                            <li><a href="properties.html" title="">LOGOUT</a></li>
+                                        </ul>
+                                    </li>
 
                                 </ul>
                             </nav>
